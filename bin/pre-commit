@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+# Example pre-commit hook: triggers rubocop & eslint on staged files.
+#
+# To use it, create a symlink in your .git/hooks directory:
+#
+# $ ln -s $(pwd)/bin/pre-commit .git/hooks
+set -e
+
+# Ruby
+staged_files="$(git diff --cached --name-only --diff-filter=ACM . | grep '\.rb$' || true)"
+
+if [ -n "$staged_files" ]; then
+  bundle exec rubocop -c .rubocop.yml --auto-correct-all --fail-level autocorrect $staged_files
+fi
+
+# ERB
+staged_views="$(git diff --cached --name-only --diff-filter=ACM . | grep '.html.erb' || true)"
+
+if [ -n "$staged_views" ]; then
+  echo $staged_views | xargs bundle exec erblint --autocorrect
+fi

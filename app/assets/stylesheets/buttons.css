@@ -1,0 +1,46 @@
+.btn {
+  display: inline-block;
+  text-align: center;
+  padding: var(--spacing-xs) var(--spacing-xl);
+  margin: var(--spacing-md) 0;
+  font-size: var(--text-sm);
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn--primary {
+  background: var(--indigo-1);
+  border: 1px var(--indigo-1) solid;
+  color: var(--white);
+
+  &:hover {
+    background: var(--indigo-2);
+  }
+}
+
+.btn--secondary {
+  background: var(--yellow-3);
+  border: 1px var(--yellow-3) solid;
+  color: var(--white);
+
+  &:hover {
+    background: var(--yellow-4);
+  }
+}
+
+.btn--tertiary {
+  background: transparent;
+  color: var(--indigo-1);
+  border: 1px var(--indigo-1) solid;
+}
+
+.btn--danger {
+  background: var(--red-1);
+  border: 1px var(--red-1) solid;
+  color: var(--white);
+
+  &:hover {
+    background: var(--red-2);
+  }
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= yield :page_title %> &middot; Boilerplate</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true %>
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="<%= request.original_url %>">
+  <meta property="og:site_name" content="">
+  <%= content_for(:head) %>
+</head>
+
+<body class="<%= body_class %>">
+  <div class="page-wrapper">
+    <header class="page-header">
+      <div class="page-header__group">
+        <a href="/">Hello</a>
+      </div>
+
+      <div class="page-header__group">
+        <nav role="nav">
+          <ul class="page-header__user-nav">
+            <li><%= link_to 'Log in', '#' %></li>
+            <li><%= link_to 'Sign up', '#' %></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <%= render 'flashes' -%>
+
+      <%= yield %>
+    </main>
+
+    <footer class="page-footer">
+      &copy; Copyright <%= Time.zone.today.year %>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+/*
+ * Page layout
+ */
+
+.page-wrapper {
+  width: var(--max-content-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-areas:
+    "header header header"
+    "content content content"
+    "footer footer footer";
+  grid-gap: var(--spacing-lg);
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
+.page-header {
+  grid-area: header;
+  padding: var(--spacing-md) var(--spacing-lg);
+}
+
+.page-content {
+  grid-area: content;
+  padding: 0 var(--spacing-lg);
+}
+
+.page-footer {
+  grid-area: footer;
+  padding: var(--spacing-xl) var(--spacing-lg);
+}

@@ -1,0 +1,31 @@
+.flashes {
+}
+
+.flash {
+  text-align: center;
+  padding: var(--spacing-md);
+  margin: var(--spacing-md) 0;
+  font-size: var(--text-sm);
+  border-radius: var(--border-radius);
+}
+
+.flash--alert {
+  background-color: var(--light-red-2);
+  color: var(--red-5);
+}
+
+.flash--error {
+  background-color: var(--light-red-4);
+  color: var(--white);
+}
+
+.flash--notice {
+  background-color: var(--light-yellow-3);
+  color: var(--yellow-5);
+}
+
+.flash--success {
+  background-color: var(--light-green-4);
+  color: var(--white);
+}
+

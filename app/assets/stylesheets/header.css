@@ -1,0 +1,22 @@
+/*
+ * Page header styles
+ */
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-header__group {
+
+}
+
+.page-header__user-nav {
+  display: flex;
+
+  & li {
+    margin-left: var(--spacing-lg);
+  }
+}
+
