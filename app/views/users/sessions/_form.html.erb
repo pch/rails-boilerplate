@@ -1,0 +1,28 @@
+<%= app_form_with(url: users_sessions_path) do |f| %>
+  <% if error %>
+    <div class="form-error"><%= error %></div>
+  <% end %>
+
+  <%= f.field :email do %>
+    <%= f.label :email %>
+    <%= f.text_field :email, value: params[:email], required: true, autocorrect: "off", autocapitalize: "off", spellcheck: "false" %>
+  <% end %>
+
+  <%= f.field :password do %>
+    <%= f.label :password %>
+    <%= f.password_field :password, required: true, maxlength: 100, autocorrect: "off", autocapitalize: "off", spellcheck: "false" %>
+  <% end %>
+
+  <div class="form-actions">
+    <%= f.submit "Log in", class: "btn btn--primary btn--fw" %>
+  </div>
+<% end %>
+
+<p>
+  Don't have an account yet?
+  <%= link_to "Sign up", signup_path %>.
+</p>
+
+<p>
+  <%= link_to "Forgot my password", new_users_password_reset_path %>.
+</p>

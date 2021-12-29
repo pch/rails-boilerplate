@@ -30,4 +30,27 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  users:
+    auth:
+      login_required: "You have to log in to access this resource"
+      email_not_confirmed: "You have to confirm your email address"
+      already_logged_in: "You are already logged in"
+
+    sessions:
+      invalid_credentials: "Invalid email or password"
+      logged_out: "You are now logged-out"
+
+    email_confirmations:
+      email_confirmed: "Your email address is now confirmed"
+      link_invalid_or_expired: "Email confirmation link is invalid or expired"
+      link_sent: "Email confirmation link has been sent to your address"
+
+    password_resets:
+      password_was_reset: "Your password has been changed. You can now log in."
+      invalid_or_expired_link: "Password reset link is invalid or expired"
+
+  user_mailer:
+    email_confirmation:
+      subject: "Confirm your email"
+    password_reset:
+      subject: "Reset your password"

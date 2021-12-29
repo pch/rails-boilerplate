@@ -11,7 +11,7 @@ set -e
 staged_files="$(git diff --cached --name-only --diff-filter=ACM . | grep '\.rb$' || true)"
 
 if [ -n "$staged_files" ]; then
-  bundle exec standardrb --fix $staged_files
+  echo $staged_files | xargs  bundle exec standardrb --fix
 fi
 
 # ERB

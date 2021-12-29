@@ -1,0 +1,16 @@
+<% if params[:sent] %>
+  <div class="">
+    Check your email. If you dind't receive the link, check your spam folder or try another email address.
+  </div>
+<% end %>
+
+<%= app_form_with(url: users_password_resets_path, method: :post) do |f| %>
+  <%= f.field :email do %>
+    <%= f.label :email %>
+    <%= f.email_field :email, required: true %>
+  <% end %>
+
+  <div class="form-actions">
+    <%= f.submit "Send me a password-reset link", class: "btn btn--primary" %>
+  </div>
+<% end %>

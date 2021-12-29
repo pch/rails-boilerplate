@@ -1,0 +1,17 @@
+Set new password
+
+<%= app_form_with(model: @user, url: users_password_reset_path(params[:id])) do |f| %>
+  <%= f.field :password do %>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  <% end %>
+
+  <%= f.field :password_confirmation do %>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  <% end %>
+
+  <div class="form-actions">
+    <%= f.submit "Change my password", class: "btn btn--primary" %>
+  </div>
+<% end %>

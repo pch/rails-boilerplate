@@ -6,8 +6,8 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
-  <%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
-  <%= javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true %>
+  <%= stylesheet_link_tag "application", 'data-turbo-track': "reload" %>
+  <%= javascript_include_tag "application", 'data-turbo-track': "reload", defer: true %>
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="<%= request.original_url %>">
@@ -25,15 +25,20 @@
       <div class="page-header__group">
         <nav role="nav">
           <ul class="page-header__user-nav">
-            <li><%= link_to 'Log in', '#' %></li>
-            <li><%= link_to 'Sign up', '#' %></li>
+            <% if Current.user %>
+              <li><%= Current.user.email %></li>
+              <li><%= link_to "Log out", logout_path, data: { turbo_method: :delete } %></li>
+            <% else %>
+              <li><%= link_to "Log in", login_path %></li>
+              <li><%= link_to "Sign up", signup_path %></li>
+            <% end %>
           </ul>
         </nav>
       </div>
     </header>
 
     <main class="page-content">
-      <%= render 'flashes' -%>
+      <%= render "flashes" -%>
 
       <%= yield %>
     </main>
