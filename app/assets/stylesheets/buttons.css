@@ -2,11 +2,14 @@
   display: inline-block;
   text-align: center;
   padding: var(--spacing-xs) var(--spacing-xl);
-  margin: var(--spacing-md) 0;
   font-size: var(--text-sm);
   border-radius: var(--border-radius);
   font-weight: 600;
   transition: all 0.2s ease-in-out;
+}
+
+.btn--fw {
+  width: 100%;
 }
 
 .btn--primary {

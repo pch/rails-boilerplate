@@ -127,7 +127,7 @@
   --link-color: var(--indigo-1);
   --base-font-size: var(--text-md);
   --border-radius: 8px;
-  --border-color: var(--light-grey-3);
+  --border-color: var(--light-grey-4);
   --border-color-light: var(--light-grey-2);
   --line-height: 1.6;
 
@@ -159,9 +159,16 @@
   --link-color: var(--yellow-2);
 }
 
+@custom-media --small-viewport (max-width: 30em);
+
+@media (--small-viewport) {
+  /* styles for small viewport */
+}
+
 html {
   font-family: var(--font-family);
   font-size: var(---base-font-size);
+  width: 100vw;
 }
 
 body {
@@ -224,17 +231,4 @@ button {
 
 strong {
   font-weight: 600;
-}
-
-hr {
-  border: none;
-  border-bottom: thin var(--border-color) solid;
-  margin: var(--spacing-xl) 0;
-}
-
-.hide-m {
-}
-
-.show-m {
-  display: none !important;
 }
