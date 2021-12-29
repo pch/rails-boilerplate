@@ -69,7 +69,7 @@ class User < ApplicationRecord
   end
 
   def email_confirmation_token
-    signed_id(purpose: :email_confirmation, expires_in: 1.hour)
+    signed_id(purpose: :email_confirmation, expires_in: 24.hours)
   end
 
   private
