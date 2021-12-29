@@ -28,3 +28,6 @@
 !/app/assets/builds/.keep
 
 /node_modules
+
+# GeoLite2 City database
+/*.mmdb

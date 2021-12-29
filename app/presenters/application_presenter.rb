@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ApplicationPresenter < SimpleDelegator
   def self.presents(name)
     define_method(name) do

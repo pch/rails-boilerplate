@@ -1,9 +1,7 @@
-# frozen_string_literal: true
-
 module StoredLocation
   extend ActiveSupport::Concern
 
-  SESSION_KEY = 'user_return_to'
+  SESSION_KEY = "user_return_to"
 
   EXCLUDED_CONTROLLERS = %w[signups sessions].freeze
 

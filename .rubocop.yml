@@ -1,18 +1,10 @@
-inherit_from: .rubocop_todo.yml
+require: standard
 
-require: rubocop-rails
+inherit_gem:
+  standard: config/base.yml
 
-AllCops:
-  NewCops: enable
-
-Metrics/CyclomaticComplexity:
+Layout/SpaceInsideHashLiteralBraces:
   Enabled: false
 
-Metrics/MethodLength:
-  Enabled: false
-
-Metrics/PerceivedComplexity:
-  Enabled: false
-
-Style/Documentation:
-  Enabled: false
+Bundler/OrderedGems:
+  Enabled: true
