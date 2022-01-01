@@ -21,7 +21,7 @@ gem "turbo-rails"
 gem "bcrypt", "~> 3.1.7"
 gem "pwned"
 
-# Geocododing
+# Geocoding
 gem "geocoder"
 gem "maxminddb"
 
@@ -29,7 +29,6 @@ gem "maxminddb"
 gem "amazing_print"
 
 group :development do
-  gem "erb_lint", require: false
   gem "rack-mini-profiler"
   gem "web-console"
 end
@@ -42,6 +41,7 @@ end
 
 group :development, :test do
   gem "dotenv-rails"
+  gem "erb_lint", require: false
   gem "factory_bot_rails"
   gem "standard"
 end
