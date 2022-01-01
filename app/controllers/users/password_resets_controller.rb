@@ -4,6 +4,8 @@ class Users::PasswordResetsController < ApplicationController
     if @user
       track_activity!(action: "password_reset_requested", user: @user)
       UserMailer.with(user: @user).password_reset.deliver_later
+    else
+      track_activity!(action: "password_reset_requested", user: User.guest_user, metadata: { email: params[:email] })
     end
 
     redirect_to new_users_password_reset_path(sent: true)

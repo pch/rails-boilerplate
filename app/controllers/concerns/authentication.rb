@@ -13,9 +13,11 @@ module Authentication
 
   def authenticate_with_cookie
     session_token = cookies.encrypted[cookie_key]
-    return if session_token.blank?
-
-    Current.session = Users::Session.authenticate(session_token)
+    if session_token.present?
+      Current.session = Users::Session.authenticate(session_token)
+      Current.user = Current.session&.user
+    end
+    Current.user ||= User.guest_user
   end
 
   def log_session_access
@@ -41,25 +43,26 @@ module Authentication
   end
 
   def require_authentication
-    return true if Current.session
+    return true if Current.user.logged_in?
 
     redirect_to login_path, alert: t("users.auth.login_required")
   end
 
   def require_confirmed_email
-    return true if !Current.user || Current.user.email_confirmed?
+    return true if !Current.user.logged_in? || Current.user.email_confirmed?
 
     redirect_to users_email_confirmations_path, alert: t("users.auth.email_not_confirmed")
   end
 
   def disallow_logged_in_user
-    return true unless Current.user
+    return true unless Current.user.logged_in?
 
     redirect_to root_path, alert: t("users.auth.already_logged_in")
   end
 
   def log_in(user)
     Current.session = Users::Session.create_new_session!(user)
+    Current.user = user
     track_activity!(action: "login")
   end
 
@@ -67,6 +70,7 @@ module Authentication
     track_activity!(action: "logout")
     Current.session&.revoke!
     Current.session = nil
+    Current.user = User.guest_user
     cookies.delete(cookie_key, domain: :all)
   end
 

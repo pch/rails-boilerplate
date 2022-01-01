@@ -4,6 +4,9 @@ module Users
 
     MIN_PASSWORD_LENGTH = 6
     DEFAULT_ROLE = "user"
+    SYSTEM_USER_ID = -1
+    GUEST_USER_ID = -2
+    SYSTEM_ROLES = %w[system guest].freeze
 
     included do
       has_many :sessions, class_name: "Users::Session", dependent: :destroy
@@ -24,7 +27,7 @@ module Users
       before_validation :normalize_email
       before_create do
         self.terms_accepted_at = Time.zone.now if accept_terms
-        self.role = DEFAULT_ROLE
+        self.role ||= DEFAULT_ROLE
       end
     end
 
@@ -48,6 +51,14 @@ module Users
         email.to_s.downcase.gsub(/\s+/, "").presence
       end
 
+      def system_user
+        @system_user ||= User.find_by(id: SYSTEM_USER_ID) || create_system_user!
+      end
+
+      def guest_user
+        @guest_user ||= User.find_by(id: GUEST_USER_ID) || create_guest_user!
+      end
+
       private
 
       # Initializes a new user with a dummy pasword, forcing bcrypt hash calculation.
@@ -60,6 +71,30 @@ module Users
         User.new(password: "dummy password")
         nil
       end
+
+      def create_system_user!
+        User.create!(
+          id: SYSTEM_USER_ID,
+          name: "system",
+          email: "system-#{SecureRandom.hex}@system",
+          password: SecureRandom.urlsafe_base64(40),
+          role: "system"
+        )
+      end
+
+      def create_guest_user!
+        User.create!(
+          id: GUEST_USER_ID,
+          name: "guest",
+          email: "guest-#{SecureRandom.hex}@system",
+          password: SecureRandom.urlsafe_base64(40),
+          role: "guest"
+        )
+      end
+    end
+
+    def logged_in?
+      SYSTEM_ROLES.exclude?(role)
     end
 
     def email_confirmed?
