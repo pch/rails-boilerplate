@@ -11,7 +11,7 @@ set -e
 staged_files="$(git diff --cached --name-only --diff-filter=ACM . | grep '\.rb$' || true)"
 
 if [ -n "$staged_files" ]; then
-  echo $staged_files | xargs  bundle exec standardrb
+  bundle exec rubocop -c .rubocop.yml --auto-correct --fail-level autocorrect $staged_files
 fi
 
 # ERB
