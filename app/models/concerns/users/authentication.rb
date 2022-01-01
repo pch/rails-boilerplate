@@ -52,11 +52,11 @@ module Users
       end
 
       def system_user
-        @system_user ||= User.find_by(id: SYSTEM_USER_ID) || create_system_user!
+        User.find_by(id: SYSTEM_USER_ID) || create_system_user!
       end
 
       def guest_user
-        @guest_user ||= User.find_by(id: GUEST_USER_ID) || create_guest_user!
+        User.find_by(id: GUEST_USER_ID) || create_guest_user!
       end
 
       private
