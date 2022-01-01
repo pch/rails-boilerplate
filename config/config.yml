@@ -4,6 +4,9 @@ default: &default
   geocoding:
     maxmind_geolite2_file: ./GeoLite2-City.mmdb
 
+  mailer:
+    default_from: "from@example.com"
+
 development:
   <<: *default
 
