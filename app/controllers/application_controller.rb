@@ -3,5 +3,5 @@ class ApplicationController < ActionController::Base
   include Authentication
   include StoredLocation
 
-  before_action :require_confirmed_email!
+  before_action :require_confirmed_email
 end

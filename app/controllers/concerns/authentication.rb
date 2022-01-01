@@ -40,19 +40,19 @@ module Authentication
     :user_session
   end
 
-  def require_authentication!
+  def require_authentication
     return true if Current.session
 
     redirect_to login_path, alert: t("users.auth.login_required")
   end
 
-  def require_confirmed_email!
+  def require_confirmed_email
     return true if !Current.user || Current.user.email_confirmed?
 
     redirect_to users_email_confirmations_path, alert: t("users.auth.email_not_confirmed")
   end
 
-  def disallow_logged_in_user!
+  def disallow_logged_in_user
     return true unless Current.user
 
     redirect_to root_path, alert: t("users.auth.already_logged_in")

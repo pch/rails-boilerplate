@@ -1,5 +1,5 @@
 class Users::SessionsController < ApplicationController
-  before_action :disallow_logged_in_user!, except: %i[destroy]
+  before_action :disallow_logged_in_user, except: %i[destroy]
 
   def new
   end
