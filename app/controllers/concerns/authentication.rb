@@ -60,13 +60,25 @@ module Authentication
 
   def log_in(user)
     Current.session = Users::Session.create_new_session!(user)
-    Users::Activity.track!(action: "login")
+    track_activity!(action: "login")
   end
 
   def log_out
-    Users::Activity.track!(action: "logout")
+    track_activity!(action: "logout")
     Current.session&.revoke!
     Current.session = nil
     cookies.delete(cookie_key, domain: :all)
+  end
+
+  def track_activity!(action:, user: nil, metadata: nil)
+    Users::Activity.create!(
+      user: user || Current.user,
+      session: Current.session,
+      action: action,
+      metadata: metadata,
+      ip: Current.ip,
+      user_agent: Current.user_agent,
+      referrer: Current.referrer
+    )
   end
 end

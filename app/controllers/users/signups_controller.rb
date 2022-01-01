@@ -9,10 +9,11 @@ class Users::SignupsController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      track_activity!(action: "signup", user: @user)
       log_in(@user)
-      Users::Activity.track!(action: "signup")
       UserMailer.with(user: @user).email_confirmation.deliver_later
-      redirect_to root_path, notice: "Post was successfully created."
+
+      redirect_to root_path
     else
       render :new, status: :unprocessable_entity
     end

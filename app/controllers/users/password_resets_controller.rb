@@ -2,7 +2,7 @@ class Users::PasswordResetsController < ApplicationController
   def create
     @user = User.find_by_normalized_email(params[:email])
     if @user
-      Users::Activity.track!(action: "password_reset_requested", user: @user)
+      track_activity!(action: "password_reset_requested", user: @user)
       UserMailer.with(user: @user).password_reset.deliver_later
     end
 
@@ -18,7 +18,7 @@ class Users::PasswordResetsController < ApplicationController
 
     if @user
       if @user.update(user_params)
-        Users::Activity.track!(action: "password_reset", user: @user)
+        track_activity!(action: "password_reset", user: @user)
         redirect_to root_url, notice: t("users.password_resets.password_was_reset")
       else
         render :edit, status: :unprocessable_entity
