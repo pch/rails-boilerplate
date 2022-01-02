@@ -1,5 +1,13 @@
 require: standard
 
+AllCops:
+  SuggestExtensions: false
+  Exclude:
+    - "**/db/schema.rb"
+    - "db/**/**"
+    - "bin/**"
+    - "vendor/**/*"
+
 inherit_gem:
   standard: config/base.yml
 

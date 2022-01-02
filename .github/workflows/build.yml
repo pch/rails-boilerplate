@@ -1,0 +1,58 @@
+name: Build
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_DB: rails_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.0.3"
+          bundler-cache: true
+
+      - name: Lint ruby
+        run: bundle exec rubocop -c .rubocop.yml
+
+      - name: Set up Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.13.0
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: yarn install --pure-lockfile
+
+      - name: Build assets
+        run: |
+          yarn build
+          yarn build:css
+
+      - name: Run tests
+        env:
+          RAILS_ENV: test
+          PGHOST: localhost
+          POSTGRES_DB: rails_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: postgres
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+        run: |
+          cp config/database.ci.yml config/database.yml
+          bundle exec rails test
