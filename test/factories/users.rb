@@ -9,5 +9,6 @@ FactoryBot.define do
     password { SecureRandom.hex }
     role { "user" }
     email_confirmed_at { 1.hour.ago }
+    terms_accepted_at { 1.hour.ago }
   end
 end
