@@ -1,4 +1,9 @@
 class Users::PasswordResetsController < ApplicationController
+  before_action :ensure_valid_token, only: %i[edit update]
+
+  def new
+  end
+
   def create
     @user = User.find_by_normalized_email(params[:email])
     if @user
@@ -12,22 +17,14 @@ class Users::PasswordResetsController < ApplicationController
   end
 
   def edit
-    @user = User.find_signed(params[:id], purpose: :password_reset)
   end
 
   def update
-    @user = User.find_signed!(params[:id], purpose: :password_reset)
-
-    if @user
-      if @user.update(user_params)
-        track_activity!(action: "password_reset", user: @user)
-        redirect_to root_url, notice: t("users.password_resets.password_was_reset")
-      else
-        render :edit, status: :unprocessable_entity
-      end
+    if @user.update(user_params)
+      track_activity!(action: "password_reset", user: @user)
+      redirect_to root_url, notice: t("users.password_resets.password_was_reset")
     else
-      flash[:error] = t("users.password_resets.invalid_or_expired_link")
-      redirect_to new_users_password_reset_path
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -35,5 +32,12 @@ class Users::PasswordResetsController < ApplicationController
 
   def user_params
     params.require(:user).permit(:password, :password_confirmation)
+  end
+
+  def ensure_valid_token
+    @user = User.find_signed(params[:id], purpose: :password_reset)
+    unless @user
+      redirect_to new_users_password_reset_path, alert: t("users.password_resets.invalid_or_expired_link")
+    end
   end
 end

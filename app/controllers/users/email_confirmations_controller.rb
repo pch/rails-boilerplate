@@ -23,14 +23,9 @@ class Users::EmailConfirmationsController < ApplicationController
   end
 
   def create
-    track_activity!(action: "email_confirmation_link_resent", user: @user)
+    track_activity!(action: "email_confirmation_link_resent")
     UserMailer.with(user: Current.user).email_confirmation.deliver_later
+
     redirect_to users_email_confirmations_path, notice: t("users.email_confirmations.link_sent")
-  end
-
-  private
-
-  def user_params
-    params.require(:user).permit(:password)
   end
 end
