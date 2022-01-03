@@ -14,18 +14,7 @@
   color: var(--red-5);
 }
 
-.flash--error {
-  background-color: var(--light-red-4);
-  color: var(--white);
-}
-
 .flash--notice {
   background-color: var(--light-yellow-3);
   color: var(--yellow-5);
 }
-
-.flash--success {
-  background-color: var(--light-green-4);
-  color: var(--white);
-}
-

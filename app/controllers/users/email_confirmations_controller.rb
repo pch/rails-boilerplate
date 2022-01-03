@@ -16,8 +16,7 @@ class Users::EmailConfirmationsController < ApplicationController
 
       redirect_to root_url, notice: t("users.email_confirmations.email_confirmed")
     else
-      flash[:error] = t("users.email_confirmations.link_invalid_or_expired")
-      redirect_to users_email_confirmations_path
+      redirect_to users_email_confirmations_path, alert: t("users.email_confirmations.link_invalid_or_expired")
     end
   end
 
