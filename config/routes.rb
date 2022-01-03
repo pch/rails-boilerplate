@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     resources :sessions, only: %i[new create]
     resources :password_resets, only: %i[new create edit update]
     resources :email_confirmations, only: %i[index show create]
+
+    resource :user, only: %i[edit update destroy]
   end
 
   get "sign-up", to: "users/signups#new", as: :signup

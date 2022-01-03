@@ -9,6 +9,8 @@ module Users
     SYSTEM_ROLES = %w[system guest].freeze
 
     included do
+      attr_accessor :current_password
+
       has_many :sessions, class_name: "Users::Session", dependent: :destroy
       has_many :activities, class_name: "Users::Activity", dependent: :delete_all
 
@@ -29,6 +31,8 @@ module Users
         self.terms_accepted_at = Time.zone.now if accept_terms
         self.role ||= DEFAULT_ROLE
       end
+
+      before_update :unconfirm_email, if: :email_changed?
     end
 
     module ClassMethods
@@ -114,10 +118,36 @@ module Users
       signed_id(purpose: :email_confirmation, expires_in: 24.hours)
     end
 
+    # Stolen from devise
+    # https://rdoc.info/gems/devise/Devise/Models/DatabaseAuthenticatable#update_with_password-instance_method
+    def update_with_password(params)
+      current_password = params.delete(:current_password)
+
+      if params[:password].blank?
+        params.delete(:password)
+        params.delete(:password_confirmation) if params[:password_confirmation].blank?
+      end
+
+      # Fetch user from db again, because for some reason authenticate
+      # always returns false when called on self
+      if User.find(id).authenticate(current_password)
+        update(params)
+      else
+        assign_attributes(params)
+        valid?
+        errors.add(:current_password, current_password.blank? ? :blank : :invalid)
+        false
+      end
+    end
+
     private
 
     def normalize_email
       self.email = self.class.normalize_email(email)
+    end
+
+    def unconfirm_email
+      self.email_confirmed_at = nil
     end
   end
 end

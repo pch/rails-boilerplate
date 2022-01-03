@@ -49,6 +49,9 @@ en:
       password_was_reset: "Your password has been changed. You can now log in."
       invalid_or_expired_link: "Password reset link is invalid or expired"
 
+    user:
+      updated: "Your account information was updated"
+
   user_mailer:
     email_confirmation:
       subject: "Confirm your email"

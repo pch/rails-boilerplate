@@ -26,7 +26,7 @@
         <nav role="nav">
           <ul class="page-header__user-nav">
             <% if Current.user.logged_in? %>
-              <li><%= Current.user.email %></li>
+              <li><%= link_to Current.user.email, edit_users_user_path %></li>
               <li><%= link_to "Log out", logout_path, data: { turbo_method: :delete } %></li>
             <% else %>
               <li><%= link_to "Log in", login_path %></li>

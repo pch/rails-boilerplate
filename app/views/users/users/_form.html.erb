@@ -1,0 +1,28 @@
+<%= app_form_with(model: user, url: users_user_path) do |f| %>
+  <%= f.field :name do %>
+    <%= f.label :name %>
+    <%= f.text_field :name, required: true %>
+  <% end %>
+
+  <%= f.field :email do %>
+    <%= f.label :email %>
+    <%= f.email_field :email, required: true, autocorrect: "off", autocapitalize: "off", spellcheck: "false" %>
+  <% end %>
+
+  <%= f.field :current_password do %>
+    <%= f.label :current_password %>
+    <%= f.password_field :current_password %>
+  <% end %>
+
+  <%= f.field :password do %>
+    <%= f.label :password, "New password" %>
+    <%= f.password_field :password %>
+  <% end %>
+
+  <%= f.field :password_confirmation do %>
+    <%= f.label :password_confirmation, "New password (again)" %>
+    <%= f.password_field :password_confirmation %>
+  <% end %>
+
+  <%= f.submit "Sign up", class: "btn btn--primary btn--fw" %>
+<% end %>
