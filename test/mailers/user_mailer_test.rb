@@ -13,8 +13,8 @@ class UserMailerTest < ActionMailer::TestCase
     assert_match "Click the link below to confirm your email address", mail.body.encoded
   end
 
-  test "password_reset" do
-    mail = UserMailer.with(user: @user).password_reset
+  test "forgot_password" do
+    mail = UserMailer.with(user: @user).forgot_password
     assert_equal "Reset your password", mail.subject
     assert_equal [@user.email], mail.to
     assert_equal [Rails.configuration.app.fetch(:mailer).fetch(:default_from)], mail.from

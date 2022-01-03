@@ -8,7 +8,7 @@ class Users::PasswordResetsController < ApplicationController
     @user = User.find_by_normalized_email(params[:email])
     if @user
       track_activity!(action: "password_reset_requested", user: @user)
-      UserMailer.with(user: @user).password_reset.deliver_later
+      UserMailer.with(user: @user).forgot_password.deliver_later
     else
       track_activity!(action: "password_reset_requested", user: User.guest_user, metadata: { email: params[:email] })
     end

@@ -52,5 +52,5 @@ en:
   user_mailer:
     email_confirmation:
       subject: "Confirm your email"
-    password_reset:
+    forgot_password:
       subject: "Reset your password"
