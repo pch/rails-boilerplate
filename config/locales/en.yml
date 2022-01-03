@@ -33,7 +33,6 @@ en:
   users:
     auth:
       login_required: "You have to log in to access this resource"
-      email_not_confirmed: "You have to confirm your email address"
       already_logged_in: "You are already logged in"
 
     sessions:
@@ -41,6 +40,7 @@ en:
       logged_out: "You are now logged-out"
 
     email_confirmations:
+      email_not_confirmed: "You have to confirm your email address"
       email_confirmed: "Your email address is now confirmed"
       link_invalid_or_expired: "Email confirmation link is invalid or expired"
       link_sent: "Email confirmation link has been sent to your address"
