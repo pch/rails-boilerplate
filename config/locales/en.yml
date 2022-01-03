@@ -54,3 +54,5 @@ en:
       subject: "Confirm your email"
     forgot_password:
       subject: "Reset your password"
+    password_changed:
+      subject: "Your password was changed"

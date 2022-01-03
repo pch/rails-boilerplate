@@ -21,7 +21,9 @@ class Users::PasswordResetsController < ApplicationController
 
   def update
     if @user.update(user_params)
-      track_activity!(action: "password_reset", user: @user)
+      activity = track_activity!(action: "password_reset", user: @user)
+      UserMailer.with(user: @user, activity: activity).password_changed.deliver_later
+
       redirect_to root_url, notice: t("users.password_resets.password_was_reset")
     else
       render :edit, status: :unprocessable_entity
