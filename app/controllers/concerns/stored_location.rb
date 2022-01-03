@@ -27,7 +27,7 @@ module StoredLocation
     session[stored_location_key] || root_path
   end
 
-  def after_sign_in_path
+  def after_log_in_path
     stored_location
   end
 

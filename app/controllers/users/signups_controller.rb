@@ -13,7 +13,7 @@ class Users::SignupsController < ApplicationController
       log_in(@user)
       UserMailer.with(user: @user).email_confirmation.deliver_later
 
-      redirect_to root_path
+      redirect_to after_sign_up_path
     else
       render :new, status: :unprocessable_entity
     end

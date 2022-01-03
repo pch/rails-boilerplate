@@ -9,8 +9,9 @@ class Users::SessionsController < ApplicationController
 
     if @user
       log_in(@user)
-      redirect_to after_sign_in_path
+      redirect_to after_log_in_path
     else
+      track_activity!(action: "failed_login", metadata: { email: params[:email] })
       @error = t("users.sessions.invalid_credentials")
       render :new, status: :unprocessable_entity
     end
