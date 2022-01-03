@@ -4,6 +4,8 @@ class Users::EmailConfirmationsController < ApplicationController
 
   def index
     redirect_to root_url if Current.user.email_confirmed?
+
+    flash.now.alert = t("users.email_confirmations.email_not_confirmed")
   end
 
   def show

@@ -51,7 +51,7 @@ module Authentication
   def require_confirmed_email
     return true if !Current.user.logged_in? || Current.user.email_confirmed?
 
-    redirect_to users_email_confirmations_path, alert: t("users.auth.email_not_confirmed")
+    redirect_to users_email_confirmations_path
   end
 
   def disallow_logged_in_user
