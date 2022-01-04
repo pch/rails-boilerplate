@@ -9,6 +9,10 @@ class Users::Activity < ApplicationRecord
 
   after_create :geocode
 
+  def browser
+    @browser ||= Browser.new(user_agent)
+  end
+
   private
 
   def geocode

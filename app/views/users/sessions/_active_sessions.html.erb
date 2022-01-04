@@ -1,0 +1,23 @@
+<div class="sessions">
+  <% sessions.each do |session| %>
+    <div class="session">
+      <div>
+        <%= session.last_activity.browser.platform.name %> ·
+        <%= session.last_activity.country %>,
+        <%= session.last_activity.city %> ·
+        <%= session.last_activity.ip %>
+      </div>
+
+      <div>
+        <%= session.last_activity.browser.name %> ·
+        <% if session == Current.session %>
+          Active now
+        <% else %>
+          <%= time_ago_in_words session.accessed_at %> ago
+        <% end %>
+      </div>
+
+      <div><%= link_to "Log out", users_session_path(session), data: { turbo_method: "delete" } %></div>
+    </div>
+  <% end %>
+</div>

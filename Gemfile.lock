@@ -74,6 +74,7 @@ GEM
       parser (>= 2.4)
       smart_properties
     bindex (0.8.1)
+    browser (5.3.1)
     builder (3.2.4)
     capybara (3.36.0)
       addressable
@@ -250,6 +251,7 @@ PLATFORMS
 DEPENDENCIES
   amazing_print
   bcrypt (~> 3.1.7)
+  browser
   capybara
   cssbundling-rails
   dotenv-rails

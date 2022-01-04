@@ -1,6 +1,7 @@
 class Users::UsersController < ApplicationController
   skip_before_action :require_confirmed_email
   before_action :require_authentication
+  before_action :load_sessions
 
   def edit
     @user = Current.user
@@ -37,5 +38,9 @@ class Users::UsersController < ApplicationController
 
     activity = track_activity!(action: "password_changed")
     UserMailer.with(user: @user, activity: activity).password_changed.deliver_later
+  end
+
+  def load_sessions
+    @sessions = Current.user.sessions.active.order(accessed_at: :desc).includes(:last_activity)
   end
 end

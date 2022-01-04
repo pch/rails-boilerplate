@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   namespace :users do
     resources :signups, only: %i[new create]
-    resources :sessions, only: %i[new create]
+    resources :sessions, only: %i[new create destroy]
     resources :password_resets, only: %i[new create edit update]
     resources :email_confirmations, only: %i[index show create]
 

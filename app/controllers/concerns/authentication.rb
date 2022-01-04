@@ -74,10 +74,10 @@ module Authentication
     cookies.delete(cookie_key, domain: :all)
   end
 
-  def track_activity!(action:, user: nil, metadata: nil)
+  def track_activity!(action:, user: nil, session: nil, metadata: nil)
     Users::Activity.create!(
       user: user || Current.user,
-      session: Current.session,
+      session: session || Current.session,
       action: action,
       metadata: metadata,
       ip: Current.ip,

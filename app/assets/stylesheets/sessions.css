@@ -1,0 +1,10 @@
+.sessions {
+  margin-top: var(--spacing-md);
+  border: 1px var(--border-color) solid;
+  border-bottom: none;
+}
+
+.session {
+  padding: var(--spacing-md);
+  border-bottom: 1px var(--border-color) solid;
+}

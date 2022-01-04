@@ -108,3 +108,7 @@ input[type="checkbox"]:focus {
   background-color: var(--background-color-accent-1);
   border-radius: 12px;
 }
+
+.settings-form {
+  margin-bottom: var(--spacing-3xl);
+}

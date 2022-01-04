@@ -28,6 +28,7 @@ gem "maxminddb"
 
 # Other
 gem "amazing_print"
+gem "browser"
 
 group :development do
   gem "rack-mini-profiler"

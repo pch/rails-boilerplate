@@ -3,3 +3,9 @@
 <div class="settings-form">
   <%= render "form", user: @user %>
 </div>
+
+<div>
+  <h2>Sessions</h2>
+
+  <%= render "users/sessions/active_sessions", sessions: @sessions %>
+</div>

@@ -1,4 +1,5 @@
 class Users::SessionsController < ApplicationController
+  skip_before_action :require_confirmed_email
   before_action :disallow_logged_in_user, except: %i[destroy]
 
   def new
@@ -18,7 +19,14 @@ class Users::SessionsController < ApplicationController
   end
 
   def destroy
-    log_out
-    redirect_to root_url, notice: t("users.sessions.logged_out")
+    if params[:id]
+      session = Users::Session.find_by_hashid!(params[:id])
+      track_activity!(action: "logout", session: session)
+      session.revoke!
+      redirect_to edit_users_user_path
+    else
+      log_out
+      redirect_to root_url, notice: t("users.sessions.logged_out")
+    end
   end
 end
