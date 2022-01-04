@@ -1,4 +1,6 @@
 class Users::Session < ApplicationRecord
+  include Hashid::Rails
+
   SESSION_TTL = 1.month
 
   belongs_to :user
@@ -15,6 +17,10 @@ class Users::Session < ApplicationRecord
 
   def self.create_new_session!(user)
     create!(user: user, accessed_at: Time.zone.now)
+  end
+
+  def to_param
+    hashid
   end
 
   def log_access

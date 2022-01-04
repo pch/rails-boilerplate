@@ -19,6 +19,7 @@ gem "turbo-rails"
 
 # Security
 gem "bcrypt", "~> 3.1.7"
+gem "hashid-rails"
 gem "pwned"
 
 # Geocoding
