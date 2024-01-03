@@ -10,8 +10,8 @@ gem "redis", "~> 4.0"
 gem "sidekiq"
 gem "sidekiq-failures"
 
-gem "uuid7"
 gem "based_uuid"
+gem "uuid7"
 
 # JavaScript & assets
 gem "cssbundling-rails"
