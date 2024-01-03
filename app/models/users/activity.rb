@@ -1,8 +1,10 @@
 class Users::Activity < ApplicationRecord
+  has_based_uuid prefix: :uact
+
   belongs_to :user
   belongs_to :session, optional: true
 
-  serialize :metadata, JSON
+  serialize :metadata, coder: JSON
 
   encrypts :ip, deterministic: true
   encrypts :metadata

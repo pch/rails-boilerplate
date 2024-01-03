@@ -4,9 +4,10 @@ module Users
 
     MIN_PASSWORD_LENGTH = 6
     DEFAULT_ROLE = "user"
-    SYSTEM_USER_ID = -1
-    GUEST_USER_ID = -2
     SYSTEM_ROLES = %w[system guest].freeze
+
+    GUEST_USER_EMAIL = "guest@system"
+    SYSTEM_USER_EMAIL = "system@system"
 
     included do
       attr_accessor :current_password
@@ -56,11 +57,11 @@ module Users
       end
 
       def system_user
-        User.find_by(id: SYSTEM_USER_ID) || create_system_user!
+        User.find_by(email: SYSTEM_USER_EMAIL) || create_system_user!
       end
 
       def guest_user
-        User.find_by(id: GUEST_USER_ID) || create_guest_user!
+        User.find_by(email: GUEST_USER_EMAIL) || create_guest_user!
       end
 
       private
@@ -78,9 +79,8 @@ module Users
 
       def create_system_user!
         User.create!(
-          id: SYSTEM_USER_ID,
           name: "system",
-          email: "system-#{SecureRandom.hex}@system",
+          email: SYSTEM_USER_EMAIL,
           password: SecureRandom.urlsafe_base64(40),
           role: "system"
         )
@@ -88,9 +88,8 @@ module Users
 
       def create_guest_user!
         User.create!(
-          id: GUEST_USER_ID,
           name: "guest",
-          email: "guest-#{SecureRandom.hex}@system",
+          email: GUEST_USER_EMAIL,
           password: SecureRandom.urlsafe_base64(40),
           role: "guest"
         )

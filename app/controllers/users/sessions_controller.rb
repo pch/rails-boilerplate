@@ -20,7 +20,7 @@ class Users::SessionsController < ApplicationController
 
   def destroy
     if params[:id]
-      session = Users::Session.find_by_hashid!(params[:id])
+      session = Users::Session.find_by_based_uuid!(params[:id])
       track_activity!(action: "logout", session: session)
       session.revoke!
       redirect_to edit_users_user_path

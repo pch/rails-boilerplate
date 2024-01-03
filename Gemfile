@@ -5,10 +5,13 @@ ruby "3.2.2"
 
 gem "pg", "~> 1.5"
 gem "puma", "~> 5.0"
-gem "rails", "~> 7.0"
+gem "rails", "~> 7.1"
 gem "redis", "~> 4.0"
 gem "sidekiq"
 gem "sidekiq-failures"
+
+gem "uuid7"
+gem "based_uuid"
 
 # JavaScript & assets
 gem "cssbundling-rails"
@@ -19,8 +22,8 @@ gem "turbo-rails"
 
 # Security
 gem "bcrypt", "~> 3.1.7"
-gem "hashid-rails"
 gem "pwned"
+
 
 # Geocoding
 gem "geocoder"

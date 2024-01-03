@@ -1,7 +1,7 @@
 class CreateUsersSessions < ActiveRecord::Migration[7.0]
   def change
-    create_table :users_sessions do |t|
-      t.belongs_to :user, null: false, foreign_key: true
+    create_table :users_sessions, id: :uuid do |t|
+      t.belongs_to :user, null: false, foreign_key: true, type: :uuid
       t.string :token, null: false
       t.datetime :accessed_at
       t.datetime :revoked_at

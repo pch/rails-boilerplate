@@ -10,28 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_27_121531) do
+ActiveRecord::Schema[7.1].define(version: 2021_12_27_121531) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
     t.string "password_digest", null: false
     t.string "role"
-    t.datetime "email_confirmed_at", precision: 6
-    t.datetime "terms_accepted_at", precision: 6
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "email_confirmed_at"
+    t.datetime "terms_accepted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  create_table "users_activities", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "session_id"
+  create_table "users_activities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "session_id"
     t.string "action", null: false
     t.text "metadata"
-    t.datetime "created_at", precision: 6
+    t.datetime "created_at"
     t.string "referrer"
     t.string "user_agent"
     t.string "ip"
@@ -44,13 +45,13 @@ ActiveRecord::Schema.define(version: 2021_12_27_121531) do
     t.index ["user_id"], name: "index_users_activities_on_user_id"
   end
 
-  create_table "users_sessions", force: :cascade do |t|
-    t.bigint "user_id", null: false
+  create_table "users_sessions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
     t.string "token", null: false
-    t.datetime "accessed_at", precision: 6
-    t.datetime "revoked_at", precision: 6
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "accessed_at"
+    t.datetime "revoked_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["accessed_at"], name: "index_users_sessions_on_accessed_at"
     t.index ["revoked_at"], name: "index_users_sessions_on_revoked_at"
     t.index ["token"], name: "index_users_sessions_on_token", unique: true

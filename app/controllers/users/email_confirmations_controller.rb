@@ -1,6 +1,6 @@
 class Users::EmailConfirmationsController < ApplicationController
   skip_before_action :require_confirmed_email
-  before_action :require_authentication, only: %i[index create]
+  before_action :require_authentication, only: %i[create]
 
   def index
     redirect_to root_url if Current.user.email_confirmed?

@@ -27,5 +27,9 @@ module Boilerplate
     config.active_job.queue_adapter = :sidekiq
 
     config.action_mailer.default_url_options = {host: Rails.configuration.app.fetch(:base_url)}
+
+    config.generators do |generate|
+      generate.orm :active_record, primary_key_type: :uuid
+    end
   end
 end

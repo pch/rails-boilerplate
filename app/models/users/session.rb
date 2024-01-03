@@ -1,7 +1,7 @@
 class Users::Session < ApplicationRecord
-  include Hashid::Rails
-
   SESSION_TTL = 1.month
+
+  has_based_uuid prefix: :sess
 
   belongs_to :user
   has_many :activities, class_name: "Users::Activity", dependent: :delete_all
@@ -20,7 +20,7 @@ class Users::Session < ApplicationRecord
   end
 
   def to_param
-    hashid
+    based_uuid
   end
 
   def log_access

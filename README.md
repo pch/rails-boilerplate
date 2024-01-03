@@ -12,7 +12,7 @@ Includes:
 - CSS bundling (postcss) & JS bundling (esbuild, turbo, stimulus)
 - basic CSS
 - sidekiq
-- [hashids](https://github.com/jcypret/hashid-rails) for obfuscating sequential IDs in URLs
+- [BasedUUID](https://github.com/pch/based_uuid) - URL-friendly UUIDs
 
 It is heavily based on my personal preferences and opinions, but I hope it can be a useful starting point for your apps too.
 
@@ -56,9 +56,6 @@ active_record_encryption:
   primary_key: <PRIMARY_KEY>
   deterministic_key: <DETERMINISTIC_KEY>
   key_derivation_salt: <SALT_STRING>
-
-# This could be, for example, the result of SecureRandom.hex
-hashid_salt: <RANDOM STRING FOR HASHID IDS>
 ```
 
 ### Setup database
