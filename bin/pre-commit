@@ -8,7 +8,7 @@
 set -e
 
 # Ruby
-staged_files="$(git diff --cached --name-only --diff-filter=ACM . | grep '\.rb$' || true)"
+staged_files="$(git diff --cached --name-only --diff-filter=ACM . | grep -E '(Gemfile|\.rb)$' || true)"
 
 if [ -n "$staged_files" ]; then
   bundle exec rubocop -c .rubocop.yml --auto-correct --fail-level autocorrect $staged_files
