@@ -1,0 +1,45 @@
+version: '3.7'
+
+x-backend: &backend
+  stdin_open: true
+  tty: true
+  build:
+    context: .
+    dockerfile: ./Dockerfile.development
+  volumes:
+    - .:/rails
+    - node_modules:/rails/node_modules
+    - gem_cache:/gems
+  depends_on:
+    - database
+  entrypoint: ./bin/docker-entrypoint
+
+services:
+  rails:
+    <<: *backend
+    ports:
+      - '3000:3000'
+    environment:
+      - RUBY_DEBUG_OPEN=true
+      - DATABASE_URL=postgres://postgres:postgres@database:5432
+    command: ./bin/rails server -b 0.0.0.0
+
+  js:
+    <<: *backend
+    command: yarn build --watch
+
+  css:
+    <<: *backend
+    command: yarn build:css --watch
+
+  database:
+    image: 'postgres:15'
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+
+volumes:
+  postgres:
+  gem_cache:
+  node_modules:
