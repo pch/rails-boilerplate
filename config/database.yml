@@ -20,10 +20,10 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  url: <%= ENV['DATABASE_URL'] || "postgres://localhost:5432" %>
 
 development:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] || "postgres://localhost:5432" %>
   database: boilerplate_development
 
   # The specified database role being used to connect to postgres.
@@ -58,7 +58,6 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] || ENV['DATABASE_URL_LOCAL'] %>
   database: boilerplate_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
