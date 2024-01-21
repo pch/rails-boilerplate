@@ -20,7 +20,7 @@ Bundler.require(*Rails.groups)
 
 module Boilerplate
   class Application < Rails::Application
-    config.load_defaults 7.0
+    config.load_defaults 7.1
 
     config.generators.helper = false
     config.app = config_for(:config).with_indifferent_access

@@ -1,12 +1,13 @@
 source "https://rubygems.org"
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.2.2"
 
-gem "pg", "~> 1.5"
-gem "puma", "~> 5.0"
-gem "rails", "~> 7.1"
-gem "redis", "~> 4.0"
+gem "rails", "~> 7.1.3"
+gem "sprockets-rails"
+gem "pg", "~> 1.1"
+gem "puma", ">= 5.0"
+gem "redis", ">= 4.0.1"
+
 gem "sidekiq"
 gem "sidekiq-failures"
 
