@@ -16,7 +16,7 @@ gem "uuid7"
 # JavaScript & assets
 gem "cssbundling-rails"
 gem "jsbundling-rails"
-gem "sprockets-rails"
+gem "propshaft"
 gem "stimulus-rails"
 gem "turbo-rails"
 

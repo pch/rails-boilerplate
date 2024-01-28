@@ -9,6 +9,7 @@ Includes:
 - auth activity tracking (login, logout, password reset, failed login attempts)
 - city-level geocoding for IP addresses
 - revokable sessions
+- [propshaft](https://github.com/rails/propshaft)
 - CSS bundling (postcss) & JS bundling (esbuild, turbo, stimulus)
 - basic CSS
 - sidekiq
